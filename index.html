@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coffee & Books</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">☕ Coffee & Books</div>
+    <nav>
+      <a href="#hero">Inicio</a>
+      <a href="#menu">Menú</a>
+      <a href="#galeria">Galería</a>
+      <a href="#footer">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <h1>Un rincón para leer, soñar y disfrutar</h1>
+      <p>Café artesanal, libros y buena vibra en un solo lugar.</p>
+      <button id="btnReserva">Reservar Mesa</button>
+    </div>
+  </section>
+
+  <!-- MENÚ -->
+  <section id="menu">
+    <h2>Nuestro Menú</h2>
+
+    <div class="menu-grid">
+      <div class="menu-item">
+        <h3>Latte Caramelo</h3>
+        <p>Suave mezcla con jarabe casero.</p>
+        <span>$65</span>
+      </div>
+
+      <div class="menu-item">
+        <h3>Mocha Oscuro</h3>
+        <p>Chocolate amargo premium.</p>
+        <span>$70</span>
+      </div>
+
+      <div class="menu-item">
+        <h3>Té Chai Cremoso</h3>
+        <p>Especias auténticas y espuma perfecta.</p>
+        <span>$55</span>
+      </div>
+
+      <div class="menu-item">
+        <h3>Panini Caprese</h3>
+        <p>Albahaca fresca, tomate y mozzarella.</p>
+        <span>$90</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  <section id="galeria">
+    <h2>Galería</h2>
+
+    <div class="galeria-grid">
+      <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348" />
+      <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd" />
+      <img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247" />
+      <img src="https://images.unsplash.com/photo-1517686469429-8bdb88b9f907" />
+    </div>
+  </section>
+
+  <!-- MODAL RESERVA -->
+  <div id="modalReserva" class="modal">
+    <div class="modal-content">
+      <span id="cerrarModal" class="cerrar">&times;</span>
+      <h2>Reservar Mesa</h2>
+      <input type="text" id="nombre" placeholder="Tu nombre">
+      <input type="number" id="personas" placeholder="Personas">
+      <input type="datetime-local" id="fecha">
+      <button id="guardarReserva">Guardar Reserva</button>
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <p>© 2025 Coffee & Books — Hecho con ♥</p>
+  </footer>
+
+
+  <!-- ========== JS ========== -->
+  <script>
+    const btnReserva = document.getElementById("btnReserva");
+    const modal = document.getElementById("modalReserva");
+    const cerrarModal = document.getElementById("cerrarModal");
+    const guardarReserva = document.getElementById("guardarReserva");
+
+    // Abrir modal
+    btnReserva.onclick = () => {
+      modal.style.display = "flex";
+    };
+
+    // Cerrar modal
+    cerrarModal.onclick = () => {
+      modal.style.display = "none";
+    };
+
+    // Guardar reserva
+    guardarReserva.onclick = () => {
+      const nombre = document.getElementById("nombre").value;
+      const personas = document.getElementById("personas").value;
+      const fecha = document.getElementById("fecha").value;
+
+      if (!nombre || !personas || !fecha) {
+        alert("Rellena todos los campos.");
+        return;
+      }
+
+      const reserva = { nombre, personas, fecha };
+
+      // Guardar en localStorage como demostración
+      const lista = JSON.parse(localStorage.getItem("reservas")) || [];
+      lista.push(reserva);
+      localStorage.setItem("reservas", JSON.stringify(lista));
+
+      alert("Reserva guardada");
+      modal.style.display = "none";
+    };
+
+    // Cerrar modal al hacer click afuera
+    window.onclick = (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+
+</body>
+</html>

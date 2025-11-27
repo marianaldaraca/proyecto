@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* HEADER */
+header {
+  width: 100%;
+  padding: 15px 40px;
+  background: #3a2e2e;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+
+header nav a {
+  margin-left: 20px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+header nav a:hover {
+  color: #f5d6b1;
+}
+
+/* HERO */
+#hero {
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1529070538774-1843cb3265df")
+    center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+  text-align: center;
+}
+
+#hero .hero-content {
+  background: #00000070;
+  padding: 40px;
+  border-radius: 20px;
+  color: #fff;
+}
+
+#hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+#hero button {
+  margin-top: 15px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  border: none;
+  background: #f5d6b1;
+  color: #3a2e2e;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#hero button:hover {
+  background: #ffe2c4;
+}
+
+/* MENÚ */
+#menu {
+  padding: 80px 40px;
+  background: #f8efe6;
+  text-align: center;
+}
+
+#menu h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.menu-item {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px #00000020;
+}
+
+.menu-item span {
+  font-weight: bold;
+  color: #3a2e2e;
+}
+
+/* GALERÍA */
+#galeria {
+  padding: 80px 40px;
+}
+
+#galeria h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.galeria-grid img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #00000080;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  width: 350px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cerrar {
+  font-size: 22px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+/* FOOTER */
+footer {
+  background: #3a2e2e;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
