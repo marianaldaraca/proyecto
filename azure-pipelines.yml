@@ -5,20 +5,24 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+# 1. Archivar los archivos (html, css, js)
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.SourcesDirectory)'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/web.zip'
-    replaceExistingArchive: true
+    archiveFile: '$(Build.ArtifactStagingDirectory)/site.zip'
 
+# 2. Publicar el archivo zip como artefacto
 - task: PublishBuildArtifacts@1
   inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'drop'
 
+# 3. Deploy a Azure Web App
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'conexion-azure'
-    appName: 'appweb-proyectofinal'
-    package: '$(Pipeline.Workspace)/drop/web.zip'
+    azureSubscription: 'conexion-azure'  # <-- tu service connection
+    appType: 'webAppLinux'
+    appName: 'WebApp-Portal-f627903f-aeb0'   # <-- NOMBRE EXACTO de tu WebApp
+    package: '$(Pipeline.Workspace)/drop/site.zip'
