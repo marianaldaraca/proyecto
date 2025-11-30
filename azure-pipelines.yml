@@ -5,22 +5,8 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-# 1. Preparar carpeta de salida
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-# 2. Publicar archivos como artefacto
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-
-# 3. Desplegar a Azure Web App
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'conexion-azure'   # <-- pon EXACTAMENTE el nombre de tu service connection
-    appName: 'appweb-proyectofinal'       # <-- el nombre EXACTO de tu Web App en Azure
-    package: '$(Build.ArtifactStagingDirectory)'
+    azureSubscription: 'conexion-azure'
+    appName: 'appweb-proyectofinal'
+    package: '$(System.DefaultWorkingDirectory)/**'
