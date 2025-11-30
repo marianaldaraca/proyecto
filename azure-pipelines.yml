@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - main
 
@@ -10,10 +5,23 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
+# 1. Verificar que el agente funciona y es Linux
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    echo "Agente corriendo en:"
+    uname -a
+  displayName: "Verificar agente Linux"
+
+# 2. Instalar dependencias si tuvieras (opcional)
+# Aquí solo demostramos que se ejecutan comandos de Linux
+- script: |
+    echo "No tengo dependencias, pero estoy simulando build"
+    mkdir build
+    cp -r * build/
+  displayName: "Construir proyecto (simulación)"
+
+# 3. Publicar artefactos (tu página)
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'build'
+    ArtifactName: 'drop'
+  displayName: "Publicar página como artefacto"
