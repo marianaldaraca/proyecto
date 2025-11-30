@@ -5,23 +5,20 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-# 1. Verificar que el agente funciona y es Linux
-- script: |
-    echo "Agente corriendo en:"
-    uname -a
-  displayName: "Verificar agente Linux"
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/web.zip'
+    replaceExistingArchive: true
 
-# 2. Instalar dependencias si tuvieras (opcional)
-# Aquí solo demostramos que se ejecutan comandos de Linux
-- script: |
-    echo "No tengo dependencias, pero estoy simulando build"
-    mkdir build
-    cp -r * build/
-  displayName: "Construir proyecto (simulación)"
-
-# 3. Publicar artefactos (tu página)
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'build'
-    ArtifactName: 'drop'
-  displayName: "Publicar página como artefacto"
+    artifactName: 'drop'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'conexion-azure'
+    appName: 'appweb-proyectofinal'
+    package: '$(Pipeline.Workspace)/drop/web.zip'
