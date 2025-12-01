@@ -5,8 +5,21 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: AzureWebApp@1
+# 1. Empaquetar los archivos (HTML y CSS) en un archivo ZIP
+- task: ArchiveFiles@2
+  displayName: 'Comprimir archivos del sitio'
   inputs:
-    azureSubscription: 'conexion-azure'
-    appName: 'appweb-proyectofinal'
-    package: '$(System.DefaultWorkingDirectory)/**'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+# 2. Enviar el ZIP a tu Azure Web App
+- task: AzureWebApp@1
+  displayName: 'Desplegar en Azure Web App'
+  inputs:
+    azureSubscription: 'conexion-sergio'       # <--- Tu nueva conexión
+    appType: 'webAppLinux'
+    appName: 'appweb-proyectofinal1'           # <--- Tu nueva App en Canadá
+    package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
